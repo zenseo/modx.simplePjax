@@ -9,19 +9,20 @@
 if ($modx->event->name !== 'OnLoadWebDocument') return;
 if (!$templates) return;
 
+//if ($_GET['_pjax']) {
+// getallheadersをサポートしていなければ上の行のコメントを外して以下の2行をコメントアウトする
 $header = getallheaders();
 if ($header['X-PJAX']) {
-	//if ($_GET['_pjax']) {
+
 	$templates = explode(',', $templates);
-	$rules = array();
-	foreach ($templates as $val) {
-		$item = explode('=', $val);
-		$rules[$item[0]] = $item[1];
-	}
 	$old_tid = $modx->documentObject['template'];
 	$new_tid = null;
-	if (array_key_exists($old_tid, $rules)) {
-		$new_tid = intval($rules[$old_tid]);
+	foreach ($templates as $val) {
+		$item = explode('=', $val);
+		if ($old_tid == $item[0]) {
+			$new_tid = intval($item[1]);
+			break;
+		}
 	}
 	if (is_null($new_tid)) return;
 
