@@ -9,11 +9,7 @@
 if ($modx->event->name !== 'OnLoadWebDocument') return;
 if (!$templates) return;
 
-//if ($_GET['_pjax']) {
-// getallheadersをサポートしていなければ上の行のコメントを外して以下の2行をコメントアウトする
-$header = getallheaders();
-if ($header['X-PJAX']) {
-
+if ($_GET['_pjax']) {
 	$templates = explode(',', $templates);
 	$old_tid = $modx->documentObject['template'];
 	$new_tid = null;
