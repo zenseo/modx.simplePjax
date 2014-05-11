@@ -9,7 +9,7 @@
 if ($modx->event->name !== 'OnLoadWebDocument') return;
 if (!$templates) return;
 
-if ($_GET['_pjax']) {
+if ($_GET['pjax'] || $_GET['_pjax'] || $_POST['pjax'] || $_POST['_pjax']) {
 	$templates = explode(',', $templates);
 	$old_tid = $modx->documentObject['template'];
 	$new_tid = null;
